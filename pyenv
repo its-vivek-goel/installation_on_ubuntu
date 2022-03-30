@@ -1,17 +1,32 @@
 #! /bin/bash
 
-sudo apt update -y 
-sudo apt-get install make build-essential libssl-dev zlib1g-dev \
-libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
-libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev -y
+sudo apt update -y
+sudo apt upgrade -y 
 
-sudo apt install curl -y
-curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+#installing the dependencies required for pyenv 
 
-#PyEnv Configuration
+echo Installing the required dependency 
 
-echo 'export PATH="/home/ubuntu/.pyenv/bin:$PATH"' >> ~/.bashrc
+#adding the requirement to download 'libssl1.0-dev' package 
+echo 'deb http://security.ubuntu.com/ubuntu bionic-security main' >> /etc/apt/sources.list
+sudo apt update && apt-cache policy libssl1.0-dev
+
+sudo apt install -y make build-essential libssl1.0-dev zlib1g-dev libbz2-dev \
+libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
+xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
+
+#clone the git repository 
+
+echo Cloning the pyenv repository 
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+
+#setting up the environment for pyenv in bashrc file 
+
+echo 'export PATH="/home/ubuntu/.pyenv/bin:$PATH"' >> ~/.bashrc 
 echo 'eval "$(pyenv init -)"' >> ~/.bashrc
-echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
+echo 'eval "$(pyenv init --path)"' >> ~/.bashrc
 
-exec "$SHELL"
+#loading the terminal 
+
+exec "$SHELL" 
+echo pyenv version - $(pyenv -v) is installed successfully at location - $(which pyenv)
