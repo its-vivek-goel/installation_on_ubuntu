@@ -1,5 +1,8 @@
 #!/bin/bash
 
+sudo apt update -y 
+sudo apt upgrade -y
+
 #checking pyenv is installed or not 
 if[ $(which pyenv) == '/home/ubuntu/.pyenv/bin/pyenv']
 then
@@ -10,6 +13,7 @@ then
         echo pyenv-virtualenv has installed successfully
         echo version installed - pyenv virtualenv --version
 else
+        echo np pyenv is installed at location - /home/ubuntu/.pyenv/bin/pyenv
         echo install pyenv first then you can install pyenv-virtualenv
         echo you can install pyenv from https://github.com/its-vivek-goel/installation_on_ubuntu/blob/main/pyenv
 
