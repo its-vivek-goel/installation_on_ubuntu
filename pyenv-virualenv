@@ -1,4 +1,16 @@
 #!/bin/bash
 
 #checking pyenv is installed or not 
+if[ $(which pyenv) == '/home/ubuntu/.pyenv/bin/pyenv']
+then
+        echo installing the pyenv-virtualenv
+        git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
+        echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
+        exec "$SHELL"
+        echo pyenv-virtualenv has installed successfully
+        echo version installed - pyenv virtualenv --version
+else
+        echo install pyenv first then you can install pyenv-virtualenv
+        echo you can install pyenv from https://github.com/its-vivek-goel/installation_on_ubuntu/blob/main/pyenv
+
 
