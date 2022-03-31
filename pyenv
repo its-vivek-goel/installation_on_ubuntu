@@ -1,19 +1,13 @@
 #! /bin/bash
 
 sudo apt update -y
-sudo apt upgrade -y 
 
 #installing the dependencies required for pyenv 
 
 echo Installing the required dependency 
 
-#adding the requirement to download 'libssl1.0-dev' package 
-echo 'deb http://security.ubuntu.com/ubuntu bionic-security main' >> /etc/apt/sources.list
-sudo apt update && apt-cache policy libssl1.0-dev
-
-sudo apt install -y make build-essential libssl1.0-dev zlib1g-dev libbz2-dev \
-libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
-xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
+sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev \
+libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
 
 #clone the git repository 
 
@@ -29,4 +23,11 @@ echo 'eval "$(pyenv init --path)"' >> ~/.bashrc
 #loading the terminal 
 
 exec "$SHELL" 
-echo pyenv version - $(pyenv -v) is installed successfully at location - $(which pyenv)
+
+#setting up the error in installing python version 
+
+echo 'deb http://security.ubuntu.com/ubuntu bionic-security main' | sudo tee -a /etc/apt/sources.list
+sudo apt update && apt-cache policy libssl1.0-dev -y
+sudo apt-get install libssl1.0-dev -y
+
+
