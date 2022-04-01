@@ -4,7 +4,7 @@ sudo apt update -y
 sudo apt upgrade -y
 
 #checking pyenv is installed or not 
-if[ $(which pyenv) == '/home/ubuntu/.pyenv/bin/pyenv']
+if [ $(which pyenv) == '/home/ubuntu/.pyenv/bin/pyenv' ]
 then
         echo installing the pyenv-virtualenv
         git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
