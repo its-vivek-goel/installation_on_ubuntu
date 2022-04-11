@@ -1,34 +1,36 @@
 #!/bin/bash
 
 sudo apt update -y
+sudo apt upgrade -y
 
 #downloading the requires dependencies
-sudo apt-get install curl gnupg2 wget unzip -y
+sudo apt install curl gnupg2 wget unzip -y
+
 
 #adding the GPG key , Since Pritunl is not present bydefault in the Ubuntu
-apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv E162F504A20CDF15827F718D4B7C549A058F8B6B
-apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv 7568D9BB55FF9E5287D586017AE645C0CF8E292A
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv E162F504A20CDF15827F718D4B7C549A058F8B6B
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv 7568D9BB55FF9E5287D586017AE645C0CF8E292A
 
 
 #adding the Pritunl Repository 
-echo "deb http://repo.pritunl.com/stable/apt focal main" | tee /etc/apt/sources.list.d/pritunl.list
+echo "deb http://repo.pritunl.com/stable/apt focal main" | sudo tee /etc/apt/sources.list.d/pritunl.list
 
-sudo apt-get update -y
-sudo apt-get install pritunl -y
+sudo apt update -y
+sudo apt install pritunl -y
 
 sudo systemctl start pritunl
 sudo systemctl enable pritunl
 	
 	
 #downloading and adding the MongoDB key
-wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
+wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
 #adding MongoDB repository
-echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
 
-sudo apt-get update
+sudo apt update
 
-sudo apt-get install -y mongodb-org
+sudo apt-get install mongodb-server
 
-sudo systemctl start mongod
-sudo systemctl enable mongod
+sudo systemctl start mongodb
+sudo systemctl enable mongodb
 	
